@@ -15,11 +15,10 @@ class NewsController extends Controller
     }
     public function create(Request $request)
     {
-        // admin/news/createにリダイレクトする
-        return redirect('admin/news/create');
-    
-    $this->validate($request, News::$rules);
 
+    $this->validate($request, News::$rules);
+        
+        // Validationを行う
         $news = new News;
         $form = $request->all();
 
