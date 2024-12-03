@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 use App\Models\Profile;
 
+use App\Models\Save;
+
+use Carbon\Carbon;
+
 class ProfileController extends Controller
 {
     public function add()
@@ -67,6 +71,11 @@ class ProfileController extends Controller
 
         // 該当するデータを上書きして保存する
         $profile->fill($profile_form)->save();
+        
+        $save = new Save();
+        $save->profile_id = $profile->id;
+        $save->edited_at = Carbon::now();
+        $save->save();
 
         return redirect('admin/profile');
     
